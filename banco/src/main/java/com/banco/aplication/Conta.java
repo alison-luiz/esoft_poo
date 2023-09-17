@@ -4,6 +4,7 @@ import com.banco.aplication.enums.TipoConta;
 import com.banco.pessoa.PessoaFisica;
 import com.banco.pessoa.PessoaJuridica;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Conta extends Extrato {
@@ -15,8 +16,15 @@ public class Conta extends Extrato {
     private Boolean conjunta;
     private List<PessoaFisica> pessoaFisicas;
     private List<PessoaJuridica> pessoaJuridicas;
+    private List<Extrato> extrato = new ArrayList<>();
 
     public Conta() {
+    }
+
+    public Conta(List<Extrato> extrato) {
+        if (extrato != null) {
+            this.extrato = extrato;
+        }
     }
 
     public Conta(String agencia, String conta, Double saldo, TipoConta tipoConta, Boolean conjunta, List<PessoaFisica> pessoaFisicas, List<PessoaJuridica> pessoaJuridicas) {
@@ -29,24 +37,12 @@ public class Conta extends Extrato {
         this.pessoaJuridicas = pessoaJuridicas;
     }
 
-    public Extrato gerarExtrato(Conta conta) {
-        return new Extrato(conta, conta.getRegistroTransacao());
-    }
-
     public String getAgencia() {
         return agencia;
     }
 
-    public void setAgencia(String agencia) {
-        this.agencia = agencia;
-    }
-
     public String getConta() {
         return conta;
-    }
-
-    public void setConta(String conta) {
-        this.conta = conta;
     }
 
     public Double getSaldo() {
@@ -61,31 +57,24 @@ public class Conta extends Extrato {
         return tipoConta;
     }
 
-    public void setTipoConta(TipoConta tipoConta) {
-        this.tipoConta = tipoConta;
-    }
-
     public Boolean getConjunta() {
         return conjunta;
-    }
-
-    public void setConjunta(Boolean conjunta) {
-        this.conjunta = conjunta;
     }
 
     public List<PessoaFisica> getPessoaFisicas() {
         return pessoaFisicas;
     }
 
-    public void setPessoaFisicas(List<PessoaFisica> pessoaFisicas) {
-        this.pessoaFisicas = pessoaFisicas;
-    }
-
     public List<PessoaJuridica> getPessoaJuridicas() {
         return pessoaJuridicas;
     }
 
-    public void setPessoaJuridicas(List<PessoaJuridica> pessoaJuridicas) {
-        this.pessoaJuridicas = pessoaJuridicas;
+    public List<Extrato> getExtrato() {
+        return extrato;
     }
+
+    public void setExtrato(List<Extrato> extrato) {
+        this.extrato = extrato;
+    }
+
 }

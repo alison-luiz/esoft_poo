@@ -4,8 +4,6 @@ import com.banco.aplication.Conta;
 import com.banco.aplication.enums.GeradorContaAleatoria;
 import com.banco.aplication.enums.TipoConta;
 import com.banco.pessoa.PessoaFisica;
-import com.banco.pessoa.PessoaJuridica;
-import org.w3c.dom.ls.LSOutput;
 
 import java.util.List;
 import java.util.Objects;
@@ -20,7 +18,7 @@ public class AbrirContaFisicaService extends Conta {
         String conta = GeradorContaAleatoria.GeradorContaAleatoria();
 
         if (tipoConta == TipoConta.POUPANCA && saldoInicial < tipoConta.getValorMinimoAbertura()) {
-            System.out.println("Saldo inicial insuficiente para abrir uma conta poupança");
+            System.out.println("Saldo inicial insuficiente para abrir uma conta poupança!");
             return null;
         }
 

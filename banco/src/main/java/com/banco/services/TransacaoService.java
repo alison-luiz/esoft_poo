@@ -5,10 +5,11 @@ import com.banco.aplication.Extrato;
 import com.banco.aplication.Transacao;
 import com.banco.aplication.enums.TipoTransacao;
 
+import java.util.List;
+
 public class TransacaoService extends Transacao {
 
     public TransacaoService() {
-        super();
     }
 
     public void deposito(Conta conta, Transacao transacao) {
@@ -20,9 +21,10 @@ public class TransacaoService extends Transacao {
 
         conta.setSaldo(conta.getSaldo() + transacao.getValorTransacao());
 
-        Extrato extrato = new Extrato(conta, transacao);
+        Extrato extrato = new Extrato(transacao);
+        conta.getExtrato().add(extrato);
 
-        System.out.println("Depósito realizado com sucesso!");
+        System.out.println("Depósito de R$ " + transacao.getValorTransacao() + " realizado com sucesso!");
 
     }
 
@@ -41,9 +43,13 @@ public class TransacaoService extends Transacao {
         origem.setSaldo(origem.getSaldo() - transacao.getValorTransacao());
         destino.setSaldo(destino.getSaldo() + transacao.getValorTransacao());
 
-        Extrato extrato = new Extrato(origem, transacao);
+        Extrato extratoOrigem = new Extrato(transacao);
+        origem.getExtrato().add(extratoOrigem);
 
-        System.out.println("Transferência realizada com sucesso!");
+        Extrato extratoDestino = new Extrato(transacao);
+        destino.getExtrato().add(extratoDestino);
+
+        System.out.println("Transferência de R$ " + transacao.getValorTransacao() + " realizada com sucesso!");
 
     }
 
