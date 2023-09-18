@@ -62,12 +62,25 @@ public class BancoApp {
         System.out.println("Saldo Alison antes da transferencia: " + contaAlison.getSaldo());
         System.out.println("Saldo Jose antes da transferencia: " + contaJoseMaria.getSaldo());
 
-        Transacao transferirAlison50 = new Transacao(1, 50.0, TipoTransacao.TRANSFERENCIA, "17/09/2023");
+        Transacao transferirAlison50 = new Transacao(3, 50.0, TipoTransacao.TRANSFERENCIA, "17/09/2023");
         transacao.transferencia(contaAlison, contaJoseMaria, transferirAlison50);
 
         System.out.println("Saldo Alison depois da transferencia: " + contaAlison.getSaldo());
         System.out.println("Saldo Jose depois da transferencia: " + contaJoseMaria.getSaldo());
         System.out.println("=================================");
+
+
+
+        // Realizando uma transferencia entre contas (Jose para Alison)
+//        System.out.println("Saldo Jose antes da transferencia: " + contaJoseMaria.getSaldo());
+//        System.out.println("Saldo Alison antes da transferencia: " + contaAlison.getSaldo());
+//
+//        Transacao transferirJose30 = new Transacao(4, 30.0, TipoTransacao.TRANSFERENCIA, "18/09/2023");
+//        transacao.transferencia(contaJoseMaria, contaAlison, transferirJose30);
+//
+//        System.out.println("Saldo Jose depois da transferencia: " + contaJoseMaria.getSaldo());
+//        System.out.println("Saldo Alison depois da transferencia: " + contaAlison.getSaldo());
+//        System.out.println("=================================");
 
 
 
@@ -87,6 +100,9 @@ public class BancoApp {
         System.out.println("Saldo atual da conta R$ " + contaAlison.getSaldo());
         System.out.println("=================================");
 
+
+
+        // Extrato das transações da conta Jose e Maria
         System.out.println("Extrato da conta Jose e Maria:");
         contaJoseMaria.getExtrato().forEach(extrato -> {
             System.out.println(extrato.getDataTransacao() + " " + extrato.getTipoTransacao().getDescricao() + " " + " " + extrato.getValorTransacao());

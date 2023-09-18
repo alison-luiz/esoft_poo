@@ -43,10 +43,14 @@ public class TransacaoService extends Transacao {
         origem.setSaldo(origem.getSaldo() - transacao.getValorTransacao());
         destino.setSaldo(destino.getSaldo() + transacao.getValorTransacao());
 
-        Extrato extratoOrigem = new Extrato(transacao);
+        Transacao transacaoOrigem = new Transacao(transacao.getNumeroTransacao(), transacao.getValorTransacao()*-1, TipoTransacao.TRANSFERENCIA, transacao.getDataTransacao());
+        transacaoOrigem.getTipoTransacao().setDescricao("Transferência Enviada para " + destino.getPessoaFisicas().get(0).getNomeCompeltoOuRazaoSocial());
+        Extrato extratoOrigem = new Extrato(transacaoOrigem);
         origem.getExtrato().add(extratoOrigem);
 
-        Extrato extratoDestino = new Extrato(transacao);
+        Transacao transacaoDestino = new Transacao(transacao.getNumeroTransacao(), transacao.getValorTransacao(), TipoTransacao.TRANSFERENCIA, transacao.getDataTransacao());
+        transacaoDestino.getTipoTransacao().setDescricao("Transferência Recebida de " + origem.getPessoaFisicas().get(0).getNomeCompeltoOuRazaoSocial());
+        Extrato extratoDestino = new Extrato(transacaoDestino);
         destino.getExtrato().add(extratoDestino);
 
         System.out.println("Transferência de R$ " + transacao.getValorTransacao() + " realizada com sucesso!");

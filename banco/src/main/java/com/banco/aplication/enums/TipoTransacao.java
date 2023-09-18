@@ -3,7 +3,9 @@ package com.banco.aplication.enums;
 public enum TipoTransacao {
 
     DEPOSITO("Depósito"),
-    TRANSFERENCIA("Transferência");
+    TRANSFERENCIA("Transferência"),
+    SAQUE("Saque"),
+    PAGAMENTO("Pagamento");
 
     private String descricao;
 
