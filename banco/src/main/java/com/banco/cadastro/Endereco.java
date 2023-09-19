@@ -1,4 +1,4 @@
-package com.banco.pessoa;
+package com.banco.cadastro;
 
 public class Endereco {
 

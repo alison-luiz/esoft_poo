@@ -1,4 +1,4 @@
-package com.banco.aplication.enums;
+package com.banco.modulos.enums;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

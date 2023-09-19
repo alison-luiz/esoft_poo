@@ -1,6 +1,6 @@
-package com.banco.aplication;
+package com.banco.modulos;
 
-import com.banco.aplication.enums.TipoTransacao;
+import com.banco.modulos.enums.TipoTransacao;
 
 public class Transacao extends Conta {
 
