@@ -15,6 +15,7 @@ public class Conta {
     private Boolean contaConjunta;
     private List<Cliente> titulares = new ArrayList<>();
     private List<Transacao> transacoes = new ArrayList<>();
+    private List<Financiamento> financiamentos = new ArrayList<>();
 
     public Conta() {
     }
@@ -50,5 +51,57 @@ public class Conta {
 
     public List<Cliente> getTitulares() {
         return titulares;
+    }
+
+    public List<Transacao> getTransacoes() {
+        return transacoes;
+    }
+
+    public List<Transacao> getTransacoesPorData(String dataTranscao) {
+        List<Transacao> transacoesPorData = new ArrayList<>();
+
+        for (Transacao transacao : this.transacoes) {
+            if (transacao.getDataTransacao().equals(dataTranscao)) {
+                transacoesPorData.add(transacao);
+            }
+        }
+
+        return transacoesPorData;
+    }
+
+    public List<Financiamento> getFinanciamentos() {
+        return financiamentos;
+    }
+
+    public void setAgencia(String agencia) {
+        this.agencia = agencia;
+    }
+
+    public void setNumeroConta(String numeroConta) {
+        this.numeroConta = numeroConta;
+    }
+
+    public void setSaldo(Double saldo) {
+        this.saldo = saldo;
+    }
+
+    public void setTipoConta(TipoConta tipoConta) {
+        this.tipoConta = tipoConta;
+    }
+
+    public void setContaConjunta(Boolean contaConjunta) {
+        this.contaConjunta = contaConjunta;
+    }
+
+    public void setTitulares(List<Cliente> titulares) {
+        this.titulares = titulares;
+    }
+
+    public void setTransacoes(List<Transacao> transacoes) {
+        this.transacoes = transacoes;
+    }
+
+    public void setFinanciamentos(List<Financiamento> financiamentos) {
+        this.financiamentos = financiamentos;
     }
 }

@@ -1,82 +1,78 @@
 package com.banco.services;
 
+import com.banco.cadastro.Cliente;
+import com.banco.cadastro.ClienteFisica;
+import com.banco.cadastro.Endereco;
+import com.banco.cadastro.enums.TipoCliente;
+import com.banco.modulos.Conta;
+import com.banco.modulos.enums.TipoConta;
+import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.*;
+
 public class AbrirContaServiceTest {
 
-//    @Test
-//    public void testAbrirContaCorrentePessoaFisica() {
-//
-//        AbrirContaService abrirConta = new AbrirContaService();
-//
-//        Endereco enderecoAlison = new Endereco("Rua 1", "123", "Centro", "São Paulo", "SP", "12345-123");
-//
-//        ClienteFisica alison = new ClienteFisica("Alison", "Silva", "123.456.789-10", "01/01/2000", "alison@gmail.com", "(11) 1234-5678", enderecoAlison, EstadoCivil.SOLTEIRO, null);
-//
-//        Conta contaAlison = abrirConta.abrirContaFisica(alison, TipoConta.CORRENTE, 0.0);
-//
-//        String nomeCompleto = "Alison Silva";
-//        Double saldo = 0.0;
-//        TipoConta tipoConta = TipoConta.CORRENTE;
-//
-//        Assertions.assertEquals(nomeCompleto, contaAlison.getPessoaFisicas().get(0).getNomeCompeltoOuRazaoSocial());
-//        Assertions.assertEquals(saldo, contaAlison.getSaldo());
-//        Assertions.assertEquals(tipoConta, contaAlison.getTipoConta());
-//
-//    }
-//
-//    @Test
-//    public void testAbrirContaPoupancaPessoaFisica() {
-//
-//        AbrirContaService abrirConta = new AbrirContaService();
-//
-//        Endereco enderecoAlison = new Endereco("Rua 1", "123", "Centro", "São Paulo", "SP", "12345-123");
-//
-//        ClienteFisica alison = new ClienteFisica("Alison", "Silva", "123.456.789-10", "01/01/2000", "alison@gmail.com", "(11) 1234-5678", enderecoAlison, EstadoCivil.SOLTEIRO, null);
-//
-//        Conta contaAlison = abrirConta.abrirContaFisica(alison, TipoConta.POUPANCA, 50.0);
-//
-//        String nomeCompleto = "Alison Silva";
-//        Double saldo = 50.0;
-//        TipoConta tipoConta = TipoConta.POUPANCA;
-//
-//        Assertions.assertEquals(nomeCompleto, contaAlison.getPessoaFisicas().get(0).getNomeCompeltoOuRazaoSocial());
-//        Assertions.assertEquals(saldo, contaAlison.getSaldo());
-//        Assertions.assertEquals(tipoConta, contaAlison.getTipoConta());
-//
-//    }
-//
-//    @Test
-//    public void testAbrirContaPoupancaPessoaFisicaSemValorMinimo() {
-//
-//        AbrirContaService abrirConta = new AbrirContaService();
-//
-//        Endereco enderecoAlison = new Endereco("Rua 1", "123", "Centro", "São Paulo", "SP", "12345-123");
-//
-//        ClienteFisica alison = new ClienteFisica("Alison", "Silva", "123.456.789-10", "01/01/2000", "alison@gmail.com", "(11) 1234-5678", enderecoAlison, EstadoCivil.SOLTEIRO, null);
-//
-//        Conta contaAlison = abrirConta.abrirContaFisica(alison, TipoConta.POUPANCA, 0.0);
-//
-//        Assertions.assertNull(contaAlison);
-//
-//    }
-//
-//    @Test
-//    public void testAbrirContaCorrentePessoaFisicaEmConjunto() {
-//
-//        AbrirContaService abrirConta = new AbrirContaService();
-//
-//        Endereco enderecoJoseMaria = new Endereco("Rua 1", "123", "Centro", "São Paulo", "SP", "12345-123");
-//
-//        ClienteFisica jose = new ClienteFisica("Jose", "Silva", "123.456.789-10", "01/01/2000", "jose@gmail.com", "(11) 1234-5678", enderecoJoseMaria, EstadoCivil.CASADO, "123.456.789-11");
-//        ClienteFisica maria = new ClienteFisica("Maria", "Silva", "123.456.789-11", "01/01/2000", "maria@gmail.com", "(11) 1234-5678", enderecoJoseMaria, EstadoCivil.CASADO, "123.456.789-10");
-//
-//        Conta contaJoseMaria = abrirConta.abrirContaFisicaConjunta(jose, maria, TipoConta.CORRENTE, 20.0);
-//
-//        String nomeCompletoJose = "Jose Silva";
-//        String nomeCompletoMaria = "Maria Silva";
-//
-//        Assertions.assertEquals(nomeCompletoJose, contaJoseMaria.getPessoaFisicas().get(0).getNomeCompeltoOuRazaoSocial());
-//        Assertions.assertEquals(nomeCompletoMaria, contaJoseMaria.getPessoaFisicas().get(1).getNomeCompeltoOuRazaoSocial());
-//
-//    }
+    @Test
+    public void testAbrirContaCorrentePessoaFisica() {
+
+        AbrirContaService abrirConta = new AbrirContaService();
+
+        Endereco enderecoAlison = new Endereco("Rua 1", "123", "Centro", "São Paulo", "SP", "12345-123");
+
+        ClienteFisica clienteAlison = new ClienteFisica("alison@gmail.com", "(11) 1234-5678", enderecoAlison, "Alison", "Silva", "123.456.789-10", "01/01/2000", TipoCliente.FISICA, null);
+
+        List<Cliente> titularesContaAlison = new ArrayList<>(Arrays.asList(clienteAlison));
+
+        Conta contaAlison = abrirConta.abrirContaFisica(titularesContaAlison, TipoConta.CORRENTE, 0.0);
+
+        assertAll("Verificar detalhes da conta",
+                () -> assertEquals("Alison Silva", contaAlison.getTitulares().get(0).getNomeCompeltoOuRazaoSocial(), "Nome do titular"),
+                () -> assertEquals(0.0, contaAlison.getSaldo(), "Saldo inicial"),
+                () -> assertEquals(TipoConta.CORRENTE, contaAlison.getTipoConta(), "Tipo de conta")
+        );
+
+    }
+
+    @Test
+    public void testAbrirContaPoupancaPessoaFisica() {
+
+        AbrirContaService abrirConta = new AbrirContaService();
+
+        Endereco enderecoAlison = new Endereco("Rua 1", "123", "Centro", "São Paulo", "SP", "12345-123");
+
+        ClienteFisica clienteAlison = new ClienteFisica("alison@gmail.com", "(11) 1234-5678", enderecoAlison, "Alison", "Silva", "123.456.789-10", "01/01/2000", TipoCliente.FISICA, null);
+
+        List<Cliente> titularesContaAlison = new ArrayList<>(Arrays.asList(clienteAlison));
+
+        Conta contaAlison = abrirConta.abrirContaFisica(titularesContaAlison, TipoConta.POUPANCA, 50.0);
+
+        assertAll("Verificar detalhes da conta",
+                () -> assertEquals("Alison Silva", contaAlison.getTitulares().get(0).getNomeCompeltoOuRazaoSocial(), "Nome do titular"),
+                () -> assertEquals(50.0, contaAlison.getSaldo(), "Saldo inicial"),
+                () -> assertEquals(TipoConta.POUPANCA, contaAlison.getTipoConta(), "Tipo de conta")
+        );
+
+    }
+
+    @Test
+    public void testAbrirContaPoupancaPessoaFisicaSemValorMinimo() {
+
+        AbrirContaService abrirConta = new AbrirContaService();
+
+        Endereco enderecoAlison = new Endereco("Rua 1", "123", "Centro", "São Paulo", "SP", "12345-123");
+
+        ClienteFisica clienteAlison = new ClienteFisica("alison@gmail.com", "(11) 1234-5678", enderecoAlison, "Alison", "Silva", "123.456.789-10", "01/01/2000", TipoCliente.FISICA, null);
+
+        List<Cliente> titularesContaAlison = new ArrayList<>(Arrays.asList(clienteAlison));
+
+        assertThrows(RuntimeException.class, () -> {
+            abrirConta.abrirContaFisica(titularesContaAlison, TipoConta.POUPANCA, 30.0);
+        });
+
+    }
 
 }

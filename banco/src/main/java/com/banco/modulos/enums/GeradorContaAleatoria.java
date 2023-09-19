@@ -12,12 +12,12 @@ public class GeradorContaAleatoria {
         String ano = dateFormat.format(dataAtual).substring(1);
 
         Random random = new Random();
+        Random randomDigito = new Random();
         int numeroAleatorio = random.nextInt(10000);
+        int digitoAleatorio = randomDigito.nextInt(10);
 
-        String numeroAleatorioFormatado = String.format("%04d", numeroAleatorio);
+        String numeroAleatorioFormatado = String.format("%04d", numeroAleatorio) + "-" + digitoAleatorio;
 
-        String conta = ano + numeroAleatorioFormatado;
-
-        return conta;
+        return ano + numeroAleatorioFormatado;
     }
 }

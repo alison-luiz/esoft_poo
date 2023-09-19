@@ -35,4 +35,20 @@ public class Transacao extends Conta {
         return dataTransacao;
     }
 
+    public void setNumeroTransacao(Integer numeroTransacao) {
+        this.numeroTransacao = numeroTransacao;
+    }
+
+    public void setValorTransacao(Double valorTransacao) {
+        this.valorTransacao = valorTransacao;
+    }
+
+    public void setTipoTransacao(TipoTransacao tipoTransacao) {
+        this.tipoTransacao = tipoTransacao;
+    }
+
+    public void setDataTransacao(String dataTransacao) {
+        this.dataTransacao = dataTransacao;
+    }
+
 }

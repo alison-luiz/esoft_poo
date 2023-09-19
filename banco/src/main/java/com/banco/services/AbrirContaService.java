@@ -32,7 +32,7 @@ public class AbrirContaService extends Conta {
     public Conta abrirContaFisicaConjunta(List<Cliente> titulares, TipoConta tipoConta, Double saldoInicial) {
         if (saldoInicial < 0) throw new RuntimeException("Saldo inicial não pode ser negativo");
 
-        if (titulares.size() != 2) throw new RuntimeException("Conta conjunta deve ter no minimo dois titulares");
+        if (titulares.size() != 2) throw new RuntimeException("Conta conjunta deve ter apenas dois titulares");
 
         if (titulares.get(0).getCpfConjugeOuCnpjSocio() != titulares.get(1).getCpfOuCnpj()) throw new RuntimeException("CPF do segundo titular nao confere com o cadastrado no primeiro titular");
 
