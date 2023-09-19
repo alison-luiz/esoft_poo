@@ -73,6 +73,15 @@ public class Conta {
         return financiamentos;
     }
 
+    public Financiamento getFinanciamentoPeloNumero(String numeroFinanciamento) {
+        for (Financiamento financiamento : this.financiamentos) {
+            if (financiamento.getNumeroFinanciamento().equals(numeroFinanciamento)) {
+                return financiamento;
+            }
+        }
+        return null;
+    }
+
     public void setAgencia(String agencia) {
         this.agencia = agencia;
     }

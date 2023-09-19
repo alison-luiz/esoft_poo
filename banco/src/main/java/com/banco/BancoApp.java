@@ -76,9 +76,9 @@ public class BancoApp {
         System.out.println("Saldo conta Alison antes do deposito: " + contaAlison.getSaldo());
 
         Transacao depositarAlison100 = new Transacao(1, 100.0, TipoTransacao.DEPOSITO, "17/09/2023");
-        Transacao depositarAlison200 = new Transacao(2, 200.0, TipoTransacao.DEPOSITO, "17/09/2023");
+        Transacao depositarAlison30000 = new Transacao(2, 30000.0, TipoTransacao.DEPOSITO, "17/09/2023");
         transacao.deposito(contaAlison, depositarAlison100);
-        transacao.deposito(contaAlison, depositarAlison200);
+        transacao.deposito(contaAlison, depositarAlison30000);
 
         System.out.println("Saldo Alison depois do deposito: " + contaAlison.getSaldo());
         System.out.println("============================================================");
@@ -160,6 +160,33 @@ public class BancoApp {
 
         System.out.println("============================================================");
         System.out.println();
+
+
+
+        // Realizar o pagamento de 5 parcelas do financiamento de 50.000,00 para conta-corrente Alison
+        System.out.println();
+        System.out.println("Realizar o pagamento de 5 parcelas do financiamento de 50.000,00 para conta-corrente Alison");
+        System.out.println("============================================================");
+
+        FinanciamentoService pagarParcelasAlison50k = new FinanciamentoService();
+        pagarParcelasAlison50k.pagarParcelasDoFinanciamento(contaAlison, contaAlison.getFinanciamentos().get(0).getNumeroFinanciamento(), "5");
+
+        System.out.println();
+        System.out.println("Numero do financiamento............: " + contaAlison.getFinanciamentos().get(0).getNumeroFinanciamento());
+        System.out.println("Valor do financiamento.............: R$ " + contaAlison.getFinanciamentos().get(0).getValorFinanciamento());
+        System.out.println("Valor da parcela...................: R$ " + contaAlison.getFinanciamentos().get(0).getValorParcela());
+        System.out.println("Quantidade de parcelas.............: " + contaAlison.getFinanciamentos().get(0).getQuantidadeParcelas());
+        System.out.println("Taxa de juros......................: " + contaAlison.getFinanciamentos().get(0).getTaxaJuros() + "%");
+        System.out.println("Valor total de juros...............: R$ " + contaAlison.getFinanciamentos().get(0).getValorTotalJuros());
+        System.out.println("Valor total do financiamento.......: R$ " + contaAlison.getFinanciamentos().get(0).getValorTotalFinanciamento());
+        System.out.println("Quantidade de parcelas pagas.......: " + contaAlison.getFinanciamentos().get(0).getQuantidadeParcelasPagas());
+        System.out.println("Valor total pago...................: R$ " + contaAlison.getFinanciamentos().get(0).getValorTotalPago());
+        System.out.println("Valor restante a pagar.............: R$ " + contaAlison.getFinanciamentos().get(0).getValorRestanteAPagar());
+        System.out.println();
+
+        System.out.println("============================================================");
+        System.out.println();
+
 
     }
 }
